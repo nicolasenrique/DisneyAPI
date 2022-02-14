@@ -1,23 +1,25 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv").config();
-
 const app = express();
-
-// const recordarmeMiddleware = require('./middlewares/recordarmeMiddleware');
-// const userLoggedMiddleware = require('./middlewares/userLoggedMiddleware');
+const session = require('express-session');
 
 
-// habilitar cors policies en la app
+// enable cors in app
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
+app.use(session({
+  secret: "Shhh, it's a secret",
+  resave: false,
+  saveUninitialized: false
+}));
 
 const path = require("path");
-const methodOverride = require('method-override'); // Pasar poder usar los métodos PUT y DELETE 
+const methodOverride = require('method-override'); // In order to use PUT and DELETE 
 const publicPath = path.resolve(__dirname, "./public");
 
 //Routes
@@ -29,11 +31,11 @@ const usersRouter = require("./routes/users");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(methodOverride('_method')); // Pasar poder pisar el method="POST" en el formulario por PUT y DELETE
+app.use(methodOverride('_method')); 
 
 
 // app.use("/", mainRouter);
-app.use("/api/v1/users", usersRouter);
+app.use("/api/v1/auth", usersRouter);
 
 
 

@@ -88,6 +88,8 @@ const controlUsers = {
     const user = await db.User.findOne({where: { email: email }});
 
     if (user && (await bcryptjs.compareSync(password, user.password))) {
+      //store user in session
+      req.session.userLogged = user
       // Create token
       const token = jwt.sign(
         { user_id: user.id_user, email },
