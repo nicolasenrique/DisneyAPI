@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const dotenv = require("dotenv").config();
 
 const app = express();
 
@@ -21,7 +22,7 @@ const publicPath = path.resolve(__dirname, "./public");
 
 //Routes
 // const mainRouter = require("./routes/main");
-// const usersRouter = require("./routes/users");
+const usersRouter = require("./routes/users");
 
 //app.use(express.urlencoded({extended: false}));
 //app.use(express.json());
@@ -32,7 +33,7 @@ app.use(methodOverride('_method')); // Pasar poder pisar el method="POST" en el 
 
 
 // app.use("/", mainRouter);
-// app.use("/users", usersRouter);
+app.use("/api/v1/users", usersRouter);
 
 
 
