@@ -2,8 +2,12 @@ const path = require("path");
 const bcryptjs = require("bcryptjs");
 let db = require("../database/models");
 const jwt = require("jsonwebtoken");
+const sgMail = require('@sendgrid/mail')
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 const controlUsers = {
+
     register: async (req, res, next) =>  {
         // Our register logic starts here
         try {
@@ -33,6 +37,23 @@ const controlUsers = {
             email: email.toLowerCase(), // sanitize: convert email to lowercase
             password: encryptedPassword,
           });
+
+          //Sendgrid email
+          const msg = {
+            to: email, // Your recipient
+            from: 'nicolas.enrique56@gmail.com', // Your verified sender
+            subject: 'Welcome to Nicolas server',
+            text: ' ',
+            html: '<strong>User registered</strong>',
+          }
+          sgMail
+            .send(msg)
+            .then(() => {
+              console.log('Email sent')
+            })
+            .catch((error) => {
+              console.error(error)
+            })
       
           // Create token
           const token = jwt.sign(
@@ -52,9 +73,10 @@ const controlUsers = {
         }
         // Our register logic ends here
       },
+
    login: async (req, res, next) =>  {
      // Our login logic starts here
-  try {
+    try {
     // Get user input
     const { email, password } = req.body;
 
