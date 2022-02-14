@@ -25,6 +25,7 @@ const publicPath = path.resolve(__dirname, "./public");
 //Routes
 // const mainRouter = require("./routes/main");
 const usersRouter = require("./routes/users");
+const charactersRouter = require("./routes/characters");
 
 //app.use(express.urlencoded({extended: false}));
 //app.use(express.json());
@@ -36,6 +37,7 @@ app.use(methodOverride('_method'));
 
 // app.use("/", mainRouter);
 app.use("/api/v1/auth", usersRouter);
+app.use("/api/v1/characters", charactersRouter);
 
 
 

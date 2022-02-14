@@ -112,4 +112,4 @@ const controlUsers = {
   // Our register logic ends here
 }
 }
-    module.exports = controlUsers;
+module.exports = controlUsers;
