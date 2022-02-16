@@ -39,12 +39,12 @@ const controlUsers = {
           });
 
           //Sendgrid email
-          const msg = {
+          const msg =  await {
             to: email, // Your recipient
             from: 'nicolas.enrique56@gmail.com', // Your verified sender
             subject: 'Welcome to Nicolas server',
-            text: ' ',
-            html: '<strong>User registered</strong>',
+            text: 'Welcome',
+            html: '<strong>Succes! User registered</strong>',
           }
           sgMail
             .send(msg)
