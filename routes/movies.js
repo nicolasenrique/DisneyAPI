@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
-const charactersController = require("../controllers/charactersController");
+const moviesController = require("../controllers/moviesController");
 const auth = require("../middlewares/auth");
 
 //Middlewares
@@ -21,12 +21,12 @@ const storage = multer.diskStorage({
   
   var upload = multer({ storage: storage });
 
-  router.get("/search", auth, charactersController.search);
-  router.get("/", auth, charactersController.list);
-  router.post("/", auth, upload.single('img'), charactersController.store );
-  router.put("/:id", auth, upload.single('img'), charactersController.update );
-  router.delete("/:id", auth, charactersController.delete);
-  router.get("/:id", auth, charactersController.detail)
+  router.get("/search", auth, moviesController.search);
+  router.get("/", auth, moviesController.list);
+  router.post("/", auth, upload.single('img'), moviesController.store );
+  router.put("/:id", auth, upload.single('img'), moviesController.update );
+  router.delete("/:id", auth, moviesController.delete);
+  router.get("/:id", auth, moviesController.detail)
   
 
   module.exports = router;

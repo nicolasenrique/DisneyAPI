@@ -23,9 +23,10 @@ const methodOverride = require('method-override'); // In order to use PUT and DE
 const publicPath = path.resolve(__dirname, "./public");
 
 //Routes
-// const mainRouter = require("./routes/main");
+
 const usersRouter = require("./routes/users");
 const charactersRouter = require("./routes/characters");
+const moviesRouter = require("./routes/movies");
 
 //app.use(express.urlencoded({extended: false}));
 //app.use(express.json());
@@ -38,7 +39,7 @@ app.use(methodOverride('_method'));
 // app.use("/", mainRouter);
 app.use("/api/v1/auth", usersRouter);
 app.use("/api/v1/characters", charactersRouter);
-
+app.use("/api/v1/movies", moviesRouter);
 
 
 

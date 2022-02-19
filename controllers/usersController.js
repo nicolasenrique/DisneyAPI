@@ -44,7 +44,7 @@ const controlUsers = {
             from: 'nicolas.enrique56@gmail.com', // Your verified sender
             subject: 'Welcome to Nicolas server',
             text: 'Welcome',
-            html: '<strong>Succes! User registered</strong>',
+            html: '<strong>Success! User registered</strong>',
           }
           sgMail
             .send(msg)

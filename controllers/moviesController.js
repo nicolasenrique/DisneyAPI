@@ -2,15 +2,15 @@ const path = require("path");
 let db = require("../database/models");
 const Op = db.Sequelize.Op;
 
-const controlCharacters = {
+const controlMovies = {
     list: async (req, res, next) =>  {
         try {
-        const characters = await db.Character.findAll({attributes: ['name', 'image']});
+        const movies = await db.Movie.findAll({attributes: ['title', 'image', 'creation_date']});
         
         return res.status(200).json({
             success: true,
-            count: characters.length,
-            data: characters
+            count: movies.length,
+            data: movies
         })
         } catch(err) {
         return res.status(500).json({
@@ -21,17 +21,16 @@ const controlCharacters = {
     },
     store: async (req,res, next) =>  {
         try {
-        const character = await  db.Character.create({
-            name:req.body.name,
-            image: req.body.image,
-            age:req.body.age,
-            weight:req.body.weight,
-            history:req.body.history,
-            movie_id:req.body.id_movie
+        const movie = await  db.Movie.create({
+            image:req.body.image,
+            title: req.body.title,
+            creation_date:Date(),
+            rating:req.body.rating,
+            genre_id:req.body.genre_id,
         })
         return res.status(201).json({
             success: true,
-            data: character            
+            data: movie            
         });
         } 
             catch(err) {
@@ -43,10 +42,18 @@ const controlCharacters = {
     },
     update: async (req, res, next) => {
         try {
-            const character = await db.Character.update(
+            const movie = await db.Movie.update(
                 (req.body),
-                {where: {id_character: req.params.id}
+                {where: {id_movie: req.params.id}
         });
+
+        if(!movie)  {
+            return res.status(404).json({
+                success: false,
+                error: 'No movie found'
+            });
+        }    
+
         return res.status(201).json({
             success: true,
             data: {}
@@ -61,15 +68,15 @@ const controlCharacters = {
     },
   delete: async (req, res, next) => {
     try{
-        const character = await db.Character.findByPk(req.params.id);
+        const movie = await db.Movie.findByPk(req.params.id);
 
-        if(!character)  {
+        if(!movie)  {
             return res.status(404).json({
                 success: false,
-                error: 'No character found'
+                error: 'No movie found'
             });
         }    
-        await character.destroy();
+        await movie.destroy();
 
         return res.status(200).json({
             success: true,
@@ -85,12 +92,20 @@ const controlCharacters = {
   },
     detail: async (req, res, next) => {
         try{
-            const character = await db.Character.findByPk(req.params.id,
-                {include:[{association: "movies" }]}
+            const movie = await db.Movie.findByPk(req.params.id,
+                {include:[{association: "characters" }]}
                 );
+            
+                if(!movie)  {
+                return res.status(404).json({
+                    success: false,
+                    error: 'No movie found'
+                });
+                }    
+            
             return res.status(200).json({
                 success: true,
-                data: character
+                data: movie
             })
             } catch(err) {
             return res.status(500).json({
@@ -102,23 +117,30 @@ const controlCharacters = {
     search: async (req, res, next) => {     
         
         try {
-            const characters = await db.Character
+            // const order = await (req.query.order)
+            // const orderString = await JSON.parse(order)
+            // console.log(orderString)
+
+            const movies = await db.Movie
             .findAll({
-                include:[{association: "movies"
-             }],
+                include: [
+                    {association: "genre" }, 
+                ],
                 where: {
-                    [Op.or]: [
-                      {name:     { [Op.like]: '%' + req.query.name + '%' }},
-                      {age:  { [Op.like]: '%' + req.query.age + '%' }},
-                    //   {id_movie:  { [Op.like]: '%' + req.query.idMovie + '%' }},
-                    ]
-                } 
-        })
+                  [Op.or]: [
+                    {title:     { [Op.like]: '%' + req.query.name + '%' }},
+                    {genre_id:  { [Op.like]: '%' + req.query.genre + '%' }}
+                  ]
+              },
+                order:
+                    [["id_movie", "DESC"]]
+
+            })
             
             return res.status(200).json({
                 success: true,
-                count: characters.length,
-                data: characters
+                count: movies.length,
+                data: movies
             })
             } catch(err) {
             return res.status(500).json({
@@ -131,4 +153,4 @@ const controlCharacters = {
 
 }
 
-module.exports = controlCharacters
+module.exports = controlMovies

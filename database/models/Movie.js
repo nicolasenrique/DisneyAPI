@@ -6,6 +6,7 @@ module.exports = function (sequelize, dataTypes) {
         type: dataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
+        onDelete: 'CASCADE'
       },
       image: {
         type: dataTypes.STRING,
@@ -30,13 +31,18 @@ module.exports = function (sequelize, dataTypes) {
 
     Movie.associate = function(models) {
       Movie.belongsToMany(models.Character, {
-          as: "character",
+          onDelete: 'CASCADE',
+          as: "characters",
           through: "character_movie",
           foreignKey: "movie_id",
           otherKey: "character_id",
           timestamps: false
       })
-    }
+      Movie.belongsTo(models.Genre, {
+        as: "genre",
+        foreignKey: "genre_id"
+    })
+    }        
     return Movie;
   };
   

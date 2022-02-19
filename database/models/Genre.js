@@ -22,14 +22,6 @@ module.exports = function(sequelize, dataTypes) {
     }
 
     let Genre = sequelize.define(alias, cols, config);
-//Después del define, puedo escribir las asociaciones
-
-    Genre.associate = function(models) {
-        Genre.belongsTo(models.Movie, {
-            as: "movies_genre",
-            foreignKey: "movie_id"
-        })
-    }
 
 
     return Genre
