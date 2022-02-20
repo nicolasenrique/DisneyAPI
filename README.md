@@ -2,7 +2,7 @@
 
 Please refer to "API_documentation.md" in order to use the app. 
 
-Sequelize main tables is in the folder named "SQL". I've also added some mock tables for testing in the following route: SQL/tableData. 
+Sequelize main table is located in the folder named "SQL" with the name "disney.sql". I've also added some mock tables for testing in the following route: SQL/tableData. 
 
 IMPORTANT: Execute the "characterMovieData" after executing all other tables (given it's a many to many table).
 
