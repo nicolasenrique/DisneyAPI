@@ -129,6 +129,36 @@ AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
+INSERT INTO disney.movie (image,title,creation_date,rating,genre_id)
+VALUES ("picture","Lion King", DATE '2015-12-17',3,1);
+INSERT INTO disney.movie (image,title,creation_date,rating,genre_id)
+VALUES ("picture","Mickey movie", DATE '2015-12-17',3,1);
+INSERT INTO disney.movie (image,title,creation_date,rating,genre_id)
+VALUES ("picture","Minnie movie", DATE '2015-12-17',3,1);
+
+INSERT INTO disney.genre (name, image)
+VALUES ("Action", "picture");
+INSERT INTO disney.genre (name, image)
+VALUES ("Animation", "picture");
+INSERT INTO disney.genre (name, image)
+VALUES ("Cartoons", "picture");
+INSERT INTO disney.genre (name, image)
+VALUES ("Comedy", "picture");
+INSERT INTO disney.genre (name, image)
+VALUES ("Drama", "picture");
+
+INSERT INTO disney.movie (image,title,creation_date,rating,genre_id)
+VALUES ("picture","Lion King", DATE '2015-12-17',3,1);
+INSERT INTO disney.movie (image,title,creation_date,rating,genre_id)
+VALUES ("picture","Mickey movie", DATE '2015-12-17',3,1);
+INSERT INTO disney.movie (image,title,creation_date,rating,genre_id)
+VALUES ("picture","Minnie movie", DATE '2015-12-17',3,1);
+
+INSERT INTO disney.character_movie (character_id,movie_id)
+VALUES (5,1);
+INSERT INTO disney.character_movie (character_id,movie_id)
+VALUES (1,2);
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
