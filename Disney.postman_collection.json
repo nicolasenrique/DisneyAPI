@@ -1,0 +1,496 @@
+{
+	"info": {
+		"_postman_id": "f73480fb-3329-48bb-8caa-ebbf365e4f9e",
+		"name": "Disney",
+		"description": "This API allows to test the Login and Register process and to test the List, Create, Edit, Delete and Search methods from a Disney's Characters and Movies database.\n\nI recommend running the mock SQL table data included in the Github repository, so the user can test the API without creating new data on the tables.\n\n**IMPORTANT:**\n\nPlease add a .env file in the root of the project with the following keys (copy paste them as they are):\n\nTOKEN_KEY=secret  \nexport SENDGRID_API_KEY='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'\n\nYou can use your own SENDGRID and TOKEN_KEY as well.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18453822"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"name\":\"test\",\n\"email\": \"test@test.com\",\n\"password\": \"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						},
+						"description": "After registering and/or logging in you'll receive a token. I recommend copying it as it will be required through the CRUD process.\n\nToken will be valid for 2 hours. After that time it won't be valid anymore, so please consider you'll have to update this information from Headers at the time of testing."
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"email\": \"nicolas.enrique56@gmail.com\",\n\"password\": \"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						},
+						"description": "After registering and/or logging in you'll receive a token. I recommend copying it as it will be required through the CRUD process.\n\nToken will be valid for 2 hours. After that time it won't be valid anymore, so please consider you'll have to update this information from Headers at the time of testing."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Characters",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6Im5pY29sYXMuZW5yaXF1ZTU2QGdtYWlsLmNvbSIsImlhdCI6MTY0NzYxODcxMywiZXhwIjoxNjQ3NjI1OTEzfQ.Mw5OfZBAHWtC6CY13kSHL70b0ny3wk8hZcgq0-ZftRk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/characters/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"characters",
+								""
+							]
+						},
+						"description": "This will list the character's name and image."
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6Im5pY29sYXMuZW5yaXF1ZTU2QGdtYWlsLmNvbSIsImlhdCI6MTY0NjE3MDExOSwiZXhwIjoxNjQ2MTc3MzE5fQ.Q7TjgiT1xrUJgvkuZF0Tohv5_J9qnorWJVHwoTUqWlM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Woody2\",\n    \"image\":\"woodyPicture2\",\n    \"age\":55,\n    \"weight\":65,\n    \"history\":\"woody history\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/characters/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"characters",
+								""
+							]
+						},
+						"description": "This will create a new character."
+					},
+					"response": []
+				},
+				{
+					"name": "Edit",
+					"request": {
+						"auth": {
+							"type": "apikey"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6Im5pY29sYXMuZW5yaXF1ZUBsaXZlLmNvbSIsImlhdCI6MTY0NTMxNjkyMCwiZXhwIjoxNjQ1MzI0MTIwfQ.Ps-5afPDr2Sf4Io25lJ9Agb5EU8qygDYDU3Hms63w-4",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/characters/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"characters",
+								"2"
+							]
+						},
+						"description": "This allows to edit character information."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6Im5pY29sYXMuZW5yaXF1ZTU2QGdtYWlsLmNvbSIsImlhdCI6MTY0NjE3MDExOSwiZXhwIjoxNjQ2MTc3MzE5fQ.Q7TjgiT1xrUJgvkuZF0Tohv5_J9qnorWJVHwoTUqWlM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/characters/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"characters",
+								"8"
+							]
+						},
+						"description": "This will delete the character using ID as params.\n\nTable has been set in order to delete information from associated tables (cascade delete), so if this registry has an associated table, association will be deleted as well."
+					},
+					"response": []
+				},
+				{
+					"name": "Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6Im5pY29sYXMuZW5yaXF1ZTU2QGdtYWlsLmNvbSIsImlhdCI6MTY0NzYxODcxMywiZXhwIjoxNjQ3NjI1OTEzfQ.Mw5OfZBAHWtC6CY13kSHL70b0ny3wk8hZcgq0-ZftRk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/characters/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"characters",
+								"5"
+							]
+						},
+						"description": "This get character details and associated movies."
+					},
+					"response": []
+				},
+				{
+					"name": "Search",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6Im5pY29sYXMuZW5yaXF1ZTU2QGdtYWlsLmNvbSIsImlhdCI6MTY0NjE3MDExOSwiZXhwIjoxNjQ2MTc3MzE5fQ.Q7TjgiT1xrUJgvkuZF0Tohv5_J9qnorWJVHwoTUqWlM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/characters/search?age=30",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"characters",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "mickey",
+									"disabled": true
+								},
+								{
+									"key": "age",
+									"value": "30"
+								}
+							]
+						},
+						"description": "Here you can search by name or age"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movies",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6Im5pY29sYXMuZW5yaXF1ZUBsaXZlLmNvbSIsImlhdCI6MTY0NTMxNjkyMCwiZXhwIjoxNjQ1MzI0MTIwfQ.Ps-5afPDr2Sf4Io25lJ9Agb5EU8qygDYDU3Hms63w-4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"movies"
+							]
+						},
+						"description": "This lists movies image, title and creation date."
+					},
+					"response": []
+				},
+				{
+					"name": "Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6Im5pY29sYXMuZW5yaXF1ZUBsaXZlLmNvbSIsImlhdCI6MTY0NTQ4NjA3NywiZXhwIjoxNjQ1NDkzMjc3fQ.qybJOGTPB4P4NzjY8UlWCb8uk1LZKUTfA9gLik3VXtQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/movies/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"movies",
+								"1"
+							]
+						},
+						"description": "This will show movie details and associated characters."
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6Im5pY29sYXMuZW5yaXF1ZUBsaXZlLmNvbSIsImlhdCI6MTY0NTMxNjkyMCwiZXhwIjoxNjQ1MzI0MTIwfQ.Ps-5afPDr2Sf4Io25lJ9Agb5EU8qygDYDU3Hms63w-4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"image\": \"a picture\",\n    \"title\":\"Toy Story 2\",\n    \"rating\":\"3\",\n    \"genre_id\": \"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"movies"
+							]
+						},
+						"description": "This allows to create a new movie."
+					},
+					"response": []
+				},
+				{
+					"name": "Edit",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6Im5pY29sYXMuZW5yaXF1ZUBsaXZlLmNvbSIsImlhdCI6MTY0NTMxNjkyMCwiZXhwIjoxNjQ1MzI0MTIwfQ.Ps-5afPDr2Sf4Io25lJ9Agb5EU8qygDYDU3Hms63w-4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"image\": \"a picture\",\n        \"title\": \"New Movie\",\n        \"genre_id\": \"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/movies/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"movies",
+								"3"
+							]
+						},
+						"description": "This allows to edit a movie."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6Im5pY29sYXMuZW5yaXF1ZUBsaXZlLmNvbSIsImlhdCI6MTY0NTMxNjkyMCwiZXhwIjoxNjQ1MzI0MTIwfQ.Ps-5afPDr2Sf4Io25lJ9Agb5EU8qygDYDU3Hms63w-4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/movies/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"movies",
+								"2"
+							]
+						},
+						"description": "This will delete the movie using ID as params.\n\nTable has been set in order to delete information from associated tables (cascade delete), so if this registry has an associated table, association will be deleted as well."
+					},
+					"response": []
+				},
+				{
+					"name": "Search",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6Im5pY29sYXMuZW5yaXF1ZUBsaXZlLmNvbSIsImlhdCI6MTY0NTMxNjkyMCwiZXhwIjoxNjQ1MzI0MTIwfQ.Ps-5afPDr2Sf4Io25lJ9Agb5EU8qygDYDU3Hms63w-4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/movies/search?name=&genre=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"movies",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": ""
+								},
+								{
+									"key": "genre",
+									"value": "1"
+								}
+							]
+						},
+						"description": "This allow us to search by title or genre. Order has been set to \"DESC\" from \"id_movie\""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
