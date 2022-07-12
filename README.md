@@ -9,7 +9,7 @@ This a Disney characters and movie API
 ```bash
 git clone https://github.com/nicolasenrique/DisneyAPI.git
 ```
-2) Run: 
+2) CD into root folder and Run: 
 
 ```bash
 npm install
