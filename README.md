@@ -1,13 +1,40 @@
-# backendChallenge
+# Disney API
 
-Please refer to "API_documentation.md" in order to use the app. 
+This a Disney characters and movie API
 
-Sequelize main table is located in the folder named "SQL" with the name "disney.sql". I've also added some mock tables for testing in the following route: SQL/tableData. 
+## Installation
 
-IMPORTANT: Execute the "characterMovieData" after executing all other tables (given it's a many to many table).
+1) Clone the project 
 
-You should configure your local .env file with your Sendgrid Key and TOKEN KEY.
+```bash
+git clone https://github.com/nicolasenrique/DisneyAPI.git
+```
+2) Run: 
 
-Cheers,
+```bash
+npm install
+```
+3) Access /SQL within the project and execute disney.sql in order to install database and mock data.
 
-Nicolás
+4) Import Postman Collection
+
+https://www.getpostman.com/collections/d609a3eab90fc702a7ea
+
+Postman docs: 
+
+https://documenter.getpostman.com/view/18453822/UVkjwHeb
+
+
+## Usage 
+
+2) Run: 
+
+```bash
+npm start
+```
+
+And test with the provided collection.
+
+## Support
+
+If any doubts you can reach me in: nicolas.enrique56@gmail.com
