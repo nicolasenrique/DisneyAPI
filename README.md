@@ -24,7 +24,7 @@ Postman docs:
 
 https://documenter.getpostman.com/view/18453822/UVkjwHeb
 
-5) Change ".env.example" to ".env". Refer to the postman docs for Sendgrid Keys.
+5) Change ".env.example" to ".env". Refer to the postman docs for further information.
 
 ## Usage 
 
