@@ -24,7 +24,7 @@ Postman docs:
 
 https://documenter.getpostman.com/view/18453822/UVkjwHeb
 
-5) Change ".env.example" to ".env". Refer to the postman docs for further information.
+5) Change ".env.example" to ".env". Refer to the postman docs for setting up this file.
 
 ## Usage 
 
